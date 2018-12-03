@@ -1,18 +1,10 @@
 const fs = require('fs');
+const parseClaim = require('./claim-parser');
 
 fs.readFile('./input.txt', 'utf-8', (err, data) => {
   const grid = {};
 
-  const claims = data.split('\r\n').map((row) => {
-    const [id, x, y, w, h] = /#(\d+)\s@\s(\d+),(\d+): (\d+)x(\d+)/.exec(row).slice(1);
-    return {
-      id,
-      x: Number(x),
-      y: Number(y),
-      w: Number(w),
-      h: Number(h),
-    };
-  });
+  const claims = data.split('\r\n').map(parseClaim);
 
   claims.forEach((claim) => {
     // Fill in claim horizontally rightwards, one row at a time
