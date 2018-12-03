@@ -18,8 +18,7 @@ fs.readFile('./input.txt', 'utf-8', (err, data) => {
     // Fill in claim horizontally rightwards, one row at a time
     for (let col = claim.y; col < claim.y + claim.h; col++) {
       for (let row = claim.x; row < claim.x + claim.w; row++) {
-        const isOverlapping = Boolean(grid[`${row},${col}`]);
-        grid[`${row},${col}`] = isOverlapping ? grid[`${row},${col}`] + 1 : 1;
+        grid[`${row},${col}`] = grid[`${row},${col}`] ? grid[`${row},${col}`] + 1 : 1;
       }
     }
   });
