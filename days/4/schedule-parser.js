@@ -6,7 +6,6 @@ const createGuard = id => ({
   id,
   isAwake: true,
   minutesAsleep: {},
-  periodsAsleep: [],
   durationAsleep: 0,
 });
 
@@ -31,15 +30,16 @@ const awakeReducer = (schedule, eventTime, activeGuard) => ({
       ...activeGuard,
       durationAsleep: tallyDurationAsleep(activeGuard, schedule.lastEventTime, eventTime),
       isAwake: true,
-      minutesAsleep:
-        tallyMinutesAsleep(activeGuard.minutesAsleep, schedule.lastEventTime, eventTime),
+      minutesAsleep: !activeGuard.isAwake
+        ? tallyMinutesAsleep(activeGuard.minutesAsleep, schedule.lastEventTime, eventTime)
+        : activeGuard.minutesAsleep,
     },
   },
 });
 
 const newGuardReducer = (schedule, eventTime, activeGuard, newActiveGuardId) => ({
   ...schedule,
-  lastEventTime: eventTime,
+  ...awakeReducer(schedule, eventTime, activeGuard),
   activeGuardId: newActiveGuardId,
   guards: {
     ...schedule.guards,
@@ -47,14 +47,6 @@ const newGuardReducer = (schedule, eventTime, activeGuard, newActiveGuardId) => 
       ...createGuard(newActiveGuardId),
       ...schedule.guards[newActiveGuardId],
       isAwake: true,
-    },
-    [schedule.activeGuardId]: {
-      ...activeGuard,
-      id: schedule.activeGuardId,
-      durationAsleep: tallyDurationAsleep(activeGuard, schedule.lastEventTime, eventTime),
-      minutesAsleep: !activeGuard.isAwake
-        ? tallyMinutesAsleep(activeGuard.minutesAsleep, schedule.lastEventTime, eventTime)
-        : activeGuard.minutesAsleep,
     },
   },
 });
