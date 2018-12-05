@@ -1,7 +1,6 @@
 const sortSchedule = require('./schedule-event-sorter');
 const tallyDurationAsleep = require('./duration-asleep-tallier');
 const tallyMinutesAsleep = require('./minutes-asleep-tallier');
-const tallyPeriodsAsleep = require('./periods-asleep-tallier');
 
 const createGuard = id => ({
   id,
@@ -32,8 +31,6 @@ const awakeReducer = (schedule, eventTime, activeGuard) => ({
       ...activeGuard,
       durationAsleep: tallyDurationAsleep(activeGuard, schedule.lastEventTime, eventTime),
       isAwake: true,
-      periodsAsleep:
-        tallyPeriodsAsleep(activeGuard.periodsAsleep, schedule.lastEventTime, eventTime),
       minutesAsleep:
         tallyMinutesAsleep(activeGuard.minutesAsleep, schedule.lastEventTime, eventTime),
     },
@@ -55,9 +52,6 @@ const newGuardReducer = (schedule, eventTime, activeGuard, newActiveGuardId) => 
       ...activeGuard,
       id: schedule.activeGuardId,
       durationAsleep: tallyDurationAsleep(activeGuard, schedule.lastEventTime, eventTime),
-      periodsAsleep: !activeGuard.isAwake
-        ? tallyPeriodsAsleep(activeGuard.periodsAsleep, schedule.lastEventTime, eventTime)
-        : activeGuard.periodsAsleep,
       minutesAsleep: !activeGuard.isAwake
         ? tallyMinutesAsleep(activeGuard.minutesAsleep, schedule.lastEventTime, eventTime)
         : activeGuard.minutesAsleep,
