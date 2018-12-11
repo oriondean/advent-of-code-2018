@@ -39,7 +39,7 @@ const getTotalPower = (cache, startRow, startCol, prime, ratio) => {
   return totalPower;
 };
 
-for (let size = 1; size <= gridSize; size++) {
+for (let size = 1; size <= 100; size++) {
   const largestPrime = getLargestPrimeUpto(size, largestCachableSize);
   const sizePrimeRatio = size / largestPrime;
 
