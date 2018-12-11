@@ -19,9 +19,9 @@ const getLargestPrimeUpto = (number, upto) => [...Array(upto)]
 const calculateTotalPower = (startRow, startCol, size) => {
   let totalPower = 0;
 
-  for (let col = startCol; col < startCol + size; col++) {
-    for (let row = startRow; row < startRow + size; row++) {
-      totalPower += grid[row] && grid[row][col] ? grid[row][col] : 0;
+  for (let y = startCol; y < startCol + size; y++) {
+    for (let x = startRow; x < startRow + size; x++) {
+      totalPower += grid[x] && grid[x][y] ? grid[x][y] : 0;
     }
   }
 
@@ -43,21 +43,21 @@ for (let size = 1; size <= 100; size++) {
   const largestPrime = getLargestPrimeUpto(size, largestCachableSize);
   const sizePrimeRatio = size / largestPrime;
 
-  for (let col = 0; col < gridSize - size; col++) {
-    for (let row = 0; row < gridSize - size; row++) {
+  for (let y = 0; y < gridSize - size; y++) {
+    for (let x = 0; x < gridSize - size; x++) {
       const hasCachedPrime = sizePrimeRatio > 1 && sizePrimeRatio <= largestCachableSize;
 
       const totalPower = hasCachedPrime
-        ? getTotalPower(sizeCache, row, col, largestPrime, sizePrimeRatio)
-        : calculateTotalPower(row, col, size);
+        ? getTotalPower(sizeCache, x, x, largestPrime, sizePrimeRatio)
+        : calculateTotalPower(x, x, size);
 
       if (hasCachedPrime && size <= largestCachableSize) {
-        sizeCache[`${row},${col},${size}`] = totalPower;
+        sizeCache[`${x},${x},${size}`] = totalPower;
       }
 
       if (totalPower > maxPowerLevelSeen) {
         maxPowerLevelSeen = totalPower;
-        maxPowerLevelCoord = [row + 1, col + 1, size];
+        maxPowerLevelCoord = [x + 1, x + 1, size];
       }
     }
   }
