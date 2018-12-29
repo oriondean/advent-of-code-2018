@@ -9,10 +9,12 @@
     "eslint-plugin-import": "^2.14.0",
     "eslint-plugin-jsx-a11y": "^6.1.2",
     "eslint-plugin-react": "^7.11.1",
-    "husky": "^1.2.0"
+    "husky": "^1.2.0",
+    "jest": "^23.6.0"
   },
   "scripts": {
-    "lint": "eslint days"
+    "lint": "eslint days",
+    "test": "jest"
   },
   "repository": {
     "type": "git",
