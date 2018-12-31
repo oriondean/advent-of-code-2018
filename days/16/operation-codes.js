@@ -1,0 +1,18 @@
+module.exports = () => [
+  { name: 'addr', execute: (register, a, b, c) => ({ ...register, [c]: register[a] + register[b] }) },
+  { name: 'addi', execute: (register, a, b, c) => ({ ...register, [c]: register[a] + b }) },
+  { name: 'mulr', execute: (register, a, b, c) => ({ ...register, [c]: register[a] * register[b] }) },
+  { name: 'muli', execute: (register, a, b, c) => ({ ...register, [c]: register[a] * b }) },
+  { name: 'banr', execute: (register, a, b, c) => ({ ...register, [c]: register[a] & register[b] }) },
+  { name: 'bani', execute: (register, a, b, c) => ({ ...register, [c]: register[a] & b }) },
+  { name: 'borr', execute: (register, a, b, c) => ({ ...register, [c]: register[a] | register[b] }) },
+  { name: 'bori', execute: (register, a, b, c) => ({ ...register, [c]: register[a] | b }) },
+  { name: 'setr', execute: (register, a, b, c) => ({ ...register, [c]: register[a] }) },
+  { name: 'seti', execute: (register, a, b, c) => ({ ...register, [c]: a }) },
+  { name: 'gtir', execute: (register, a, b, c) => ({ ...register, [c]: a > register[b] ? 1 : 0 }) },
+  { name: 'gtri', execute: (register, a, b, c) => ({ ...register, [c]: register[a] > b ? 1 : 0 }) },
+  { name: 'gtrr', execute: (register, a, b, c) => ({ ...register, [c]: register[a] > register[b] ? 1 : 0 }) },
+  { name: 'eqir', execute: (register, a, b, c) => ({ ...register, [c]: a === register[b] ? 1 : 0 }) },
+  { name: 'eqri', execute: (register, a, b, c) => ({ ...register, [c]: register[a] === b ? 1 : 0 }) },
+  { name: 'eqrr', execute: (register, a, b, c) => ({ ...register, [c]: register[a] === register[b] ? 1 : 0 }) },
+];
