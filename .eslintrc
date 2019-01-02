@@ -2,12 +2,13 @@
   "extends": "airbnb",
   "env": {
     "node": true,
-    "jest": true,
+    "jest": true
   },
   "rules": {
     "no-plusplus": "off",
     "no-bitwise": "off",
     "no-console": "off",
-    "linebreak-style": "off",
+    "no-nested-ternary": "off",
+    "linebreak-style": "off"
   }
 }
