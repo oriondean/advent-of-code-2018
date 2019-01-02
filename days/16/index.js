@@ -1,6 +1,6 @@
 const fs = require('fs');
 
-const opcodes = require('./operation-codes')();
+const opcodes = require('../common/operation-codes')();
 
 const parseValue = (toParse, index) => {
   if (index === 1) {
